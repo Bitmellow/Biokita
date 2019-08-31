@@ -1,0 +1,4 @@
+tree User{
+    hisName: "John Cena",
+    power: 8000
+}
