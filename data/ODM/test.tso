@@ -1,0 +1,6 @@
+tree User{
+    hisName: "John Cena",
+    power: 8000,
+    music: "Parampampam",
+    age: "Has eat to much to say about it."
+}

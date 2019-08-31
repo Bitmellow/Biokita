@@ -20,37 +20,37 @@ class Lexer(object):
                     tokens.append(["INTEGER", text])
 
             elif text.startswith("'") or text.startswith('"'):
-                    if text.startswith("'"):
-                        startunit = "'"
-                    elif text.startswith('"'):
-                        startunit = '"'
-                    string = []
-                    bendedString = ""
-                    index2 = 0
-                    for text2 in source_text:
-                        if index2 >= source_index:
-                            if text2.endswith(startunit) == False:
-                                string.append(text2)
-                            elif text2.endswith(startunit):
-                                string.append(text2)
-                                break
-                        index2 += 1                            
-                    for word in string:
-                        if (word.endswith("'") or word.endswith('"')):
-                            if (word.endswith("',") or word.endswith('",')):
-                                word = word.replace(",", "")
-                                cs = True
-                                bendedString += word
-                            else:
-                                bendedString += word
-              
+                if text.startswith("'"):
+                    startunit = "'"
+                elif text.startswith('"'):
+                    startunit = '"'
+                string = []
+                bendedString = ""
+                index2 = 0
+                for text2 in source_text:
+                    if index2 >= source_index:
+                        if text2.endswith(startunit) == False:
+                            string.append(text2)
+                        elif text2.endswith(startunit):
+                            string.append(text2)
+                            break
+                    index2 += 1                            
+                for word in string:
+                    if (word.endswith("'") or word.endswith('"')):
+                        if (word.endswith("',") or word.endswith('",')):
+                            word = word.replace(",", "")
+                            bendedString += word
                         else:
-                            bendedString += word + " "
+                            bendedString += word
+                    else:
+                        bendedString += word + " "
 
+                if re.search(",", bendedString):
+                    bendedString = bendedString.split(",")[0]
                     tokens.append(["STRING", bendedString])
-                    if cs: 
-                        tokens.append(["CONTINOUS_STATEMENT", ","])
-
+                    tokens.append(["CONTINOUS_STATEMENT", ","])
+                else:
+                    tokens.append(["STRING", bendedString])
             elif re.match("[A-Z]", text):
                 if text.endswith("{"):
                     text = text.replace("{", "")
