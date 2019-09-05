@@ -21,7 +21,23 @@ class Parser(object):
             self.index += 1
     
     def parse_tree_declaration(self, token_stream):
-        for i in token_stream:
-            token_type = i[0]
-            token_value = i[1]
+        tokens_checked = 0
+
+        for token in range(0, len(token_stream))
+            token_type = token_stream[tokens_checked][0]
+            token_value = token_stream[tokens_checked][1]
             
+            if token == 0 and token_type == "OBJ_DEFINER":
+                last_declaration = "tree"
+            
+            elif token == 1 and token_type == "ROOT_IDENTIFIER":
+                if last_declaration == "tree":
+                    tree = [token_value, {}]
+                else:
+                    print("ERROR: Can't merge a tree without tree declaration")
+                    raise("UndeclaredError")
+
+            elif token == 2 and token_type != "ROOT_OPENING":
+                raise("RootError")
+
+            tokens_checked += 1
