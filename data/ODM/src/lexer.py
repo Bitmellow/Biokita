@@ -56,13 +56,15 @@ class Lexer(object):
                     text = text.replace("{", "")
                     tokens.append(["ROOT_IDENTIFIER", text])
                     tokens.append(["ROOT_OPENING", "{"])
+                else:
+                    tokens.append(["ROOT_IDENTIFIER", text])
             elif re.match("[a-z]", text):
                 if text.endswith(":"):
                     text = text.replace(":", "")
-                    tokens.append(["VAR_IDENTIFIER", text])
+                    tokens.append(["IDENTIFIER", text])
                     tokens.append(["OPERATOR", ":"])
                 else:
-                    tokens.append(["VAR_IDENTIFIER", text])
+                    tokens.append(["IDENTIFIER", text])
             
             elif text in "+-=/*":
                 tokens.append(["OPERATOR", text])

@@ -17,3 +17,5 @@ IA desenvolvida em Python, ainda não pode ser utilizada
 - [ ] Colocar o reconhecimento de voz
 
 - [ ] Fazer ela responder a perguntas maleáveis
+
+- [ ] Servidor de dúvidas da IA
