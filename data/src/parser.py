@@ -23,7 +23,7 @@ class Parser(object):
     def parse_tree_declaration(self, token_stream):
         tokens_checked = 0
 
-        for token in range(0, len(token_stream))
+        for token in range(0, len(token_stream)):
             token_type = token_stream[tokens_checked][0]
             token_value = token_stream[tokens_checked][1]
             
@@ -40,4 +40,28 @@ class Parser(object):
             elif token == 2 and token_type != "ROOT_OPENING":
                 raise("RootError")
 
+            elif token_type == "IDENTIFIER":
+                first_tokenID = tokens_checked + 1
+                identifier = token_value
+            
+            elif token_type == "OPERATOR" and token_value == ":":
+                if "first_tokenID" in locals() and tokens_checked == first_tokenID:
+                    operation = "set"
+                else:
+                    raise(SyntaxError())
+            
+            elif token_type == "STRING":
+                if first_tokenID in locals() and tokens_checked == first_tokenID + 1:
+                    tree[1][identifier] = token_value
+                else:
+                    tree[1]["Global"] = token_value
+
+            elif token_type == "INTEGER":
+                if first_tokenID in locals() and tokens_checked == first_tokenID + 1:
+                    tree[1][identifier] = int(token_value)
+                else:
+                    tree[1]["Global"] = int(token_value)
+
             tokens_checked += 1
+        
+        return tree
